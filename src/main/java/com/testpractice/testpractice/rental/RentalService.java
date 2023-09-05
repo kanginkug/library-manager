@@ -2,6 +2,7 @@ package com.testpractice.testpractice.rental;
 
 import com.testpractice.testpractice.book.Book;
 import com.testpractice.testpractice.book.BookCode;
+import com.testpractice.testpractice.book.BookRepository;
 import com.testpractice.testpractice.book.dto.BookRequestDto;
 import com.testpractice.testpractice.member.Member;
 import com.testpractice.testpractice.member.MemberRepository;
@@ -18,15 +19,20 @@ public class RentalService {
 
     private final RentalRepository rentalRepository;
     private final MemberRepository memberRepository;
+    private final BookRepository bookRepository;
 
     @Transactional
     public ResponseEntity<?> insertRental(RentalRequestDto rentalRequestDto, Book book, Member member) {
+
+        Long bookId=0L;
 
             if(!memberRepository.existsById(member.getId())){
                 return new ResponseEntity<>("존재하지 않는 아이디입니다.", HttpStatus.BAD_REQUEST);
             }
 
-            if(rentalRepository.findReceiveByBookName(book.getBookName()) == true){
+            bookId = bookRepository.findIdByBookName(book.getBookName());
+
+            if(rentalRepository.findReceiveByBookId(bookId) == true){
                 return new ResponseEntity<>("대출 되어 있는 책입니다.", HttpStatus.BAD_REQUEST);
             }
 
@@ -41,6 +47,6 @@ public class RentalService {
 
         return new ResponseEntity<>("대여가 완료 되었습니다", HttpStatus.OK);
 
-}
+    }
 
 }
