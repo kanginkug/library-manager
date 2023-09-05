@@ -29,8 +29,7 @@ public class Rental {
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
-    @Column
-    private String author;
+
 
     @Column
     private Date rentalDate;

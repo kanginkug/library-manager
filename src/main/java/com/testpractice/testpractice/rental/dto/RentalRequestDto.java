@@ -10,7 +10,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class RentalRequestDto {
 
-    private String author;
     private Date rentalDate;
     private Date receiveDate;
 }
