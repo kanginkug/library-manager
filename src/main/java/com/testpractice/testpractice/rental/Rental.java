@@ -29,8 +29,6 @@ public class Rental {
     @JoinColumn(name = "BOOK_ID")
     private Book book;
 
-
-
     @Column
     private Date rentalDate;
 
