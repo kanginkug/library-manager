@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberService {
 
+
     private final MemberRepository memberRepository;
     @Transactional
     public ResponseEntity<?> signup(MemberRequestDto memberRequestDto) {
@@ -29,6 +30,7 @@ public class MemberService {
                 .password(memberRequestDto.getPassword())
                 .address(memberRequestDto.getAddress())
                 .phone(memberRequestDto.getPhone())
+                .admin(memberRequestDto.isAdmin())
                 .build();
 
         memberRepository.save(member);
@@ -38,14 +40,11 @@ public class MemberService {
 
     @Transactional
     public ResponseEntity<?> login(MemberRequestDto memberRequestDto) {
+         Member member = memberRepository.findByIdAndPassword(memberRequestDto.getId(),memberRequestDto.getPassword())
+                 .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다."));
 
-        if(memberRepository.existsByIdAndPassword(memberRequestDto.getId(),memberRequestDto.getPassword())){
-            throw new IllegalArgumentException("아이디 혹은 비밀번호가 일치하지 않습니다.");
-        }
 
-        Member member = Member.builder()
-                .login(true)
-                .build();
+        member.updateLogin(true);
 
         return new ResponseEntity<>("로그인에 성공하였습니다.", HttpStatus.OK);
         

@@ -14,16 +14,17 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping()
-    public ResponseEntity<?> insertBook(@ModelAttribute BookRequestDto bookRequestDto, BookCode bookCode) throws Exception {
+    public ResponseEntity<?> insertBook(@RequestBody BookRequestDto bookRequestDto) throws Exception {
 
-        return bookService.insertBook(bookRequestDto, bookCode);
+        return bookService.insertBook(bookRequestDto);
     }
 
-    @PutMapping("/{bookId}")
-    public ResponseEntity<?> updateBook( @PathVariable("bookId") Long bookId,
-                                         @ModelAttribute BookRequestDto bookRequestDto, String memberId) throws Exception {
+    @PatchMapping("/updates-books")
+    public ResponseEntity<?> updateBook(@RequestBody BookRequestDto bookRequestDto) throws Exception {
 
-        return bookService.updateBook(bookId, bookRequestDto, memberId);
+        return bookService.updateBook(bookRequestDto);
     }
+
+
 
 }

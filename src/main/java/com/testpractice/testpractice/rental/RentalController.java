@@ -18,20 +18,20 @@ public class RentalController {
     private final RentalService rentalService;
 
     @PostMapping()
-    public ResponseEntity<?> insertRental(Book book, Member member) throws Exception {
+    public ResponseEntity<?> insertRental(@RequestBody RentalRequestDto rentalRequestDto) throws Exception {
 
-        return rentalService.insertRental( book, member);
+        return rentalService.insertRental(rentalRequestDto);
     }
 
     @GetMapping("/{bookName}")
-    public ResponseEntity<?> checkRental(@PathVariable("bookName") String bookName) {
+    public ResponseEntity<?> checkRental(@PathVariable(value ="bookName") String bookName) {
 
         return rentalService.checkRental(bookName);
     }
 
-    @PostMapping("/receiveBook")
-    public ResponseEntity<?> receiveBook(Long bookId) throws Exception {
+    @PatchMapping("/receiveBooks")
+    public ResponseEntity<?> receiveBook(@RequestBody RentalRequestDto rentalRequestDto) throws Exception {
 
-        return rentalService.receiveBook(bookId);
+        return rentalService.receiveBook(rentalRequestDto);
     }
 }

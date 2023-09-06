@@ -11,4 +11,9 @@ public class MemberRequestDto {
     private String memName;
     private String phone;
     private String address;
+    private boolean admin;
+
+    public MemberRequestDto(){
+
+    }
 }

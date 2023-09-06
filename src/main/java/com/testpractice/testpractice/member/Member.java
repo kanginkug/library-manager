@@ -1,9 +1,11 @@
 package com.testpractice.testpractice.member;
 
+import com.testpractice.testpractice.book.dto.BookRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -34,4 +36,8 @@ public class Member {
 
     @Column
     private boolean admin;
+
+    public void updateLogin(boolean login) {
+        this.login = login;
+    }
 }

@@ -12,14 +12,14 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/signup")
+    @PostMapping("/signups")
     public ResponseEntity<?> signup(@RequestBody MemberRequestDto memberRequestDto) {
 
         return memberService.signup(memberRequestDto);
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<?> signin(@RequestBody MemberRequestDto memberRequestDto) {
+    @PatchMapping("/logins")
+    public ResponseEntity<?> login(@RequestBody MemberRequestDto memberRequestDto) {
 
         return memberService.login(memberRequestDto);
     }
