@@ -31,4 +31,7 @@ public class Member {
 
     @Column
     private boolean login;
+
+    @Column
+    private boolean admin;
 }

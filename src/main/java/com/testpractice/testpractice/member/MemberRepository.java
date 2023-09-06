@@ -4,6 +4,7 @@ import com.testpractice.testpractice.rental.Rental;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
@@ -11,7 +12,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existByIdAndPassword(String memberId, String password);
 
-    List<Member> findAllById(String memberId);
+    Optional<Member> findAllById(String memberId);
 
     boolean existsByPhone(String phone);
 
