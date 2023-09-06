@@ -14,13 +14,13 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping()
-    public ResponseEntity<?> insertBoard(@ModelAttribute BookRequestDto bookRequestDto, BookCode bookCode) throws Exception {
+    public ResponseEntity<?> insertBook(@ModelAttribute BookRequestDto bookRequestDto, BookCode bookCode) throws Exception {
 
         return bookService.insertBook(bookRequestDto, bookCode);
     }
 
     @PutMapping("/{bookId}")
-    public ResponseEntity<?> updateBoard( @PathVariable("bookId") Long bookId,
+    public ResponseEntity<?> updateBook( @PathVariable("bookId") Long bookId,
                                          @ModelAttribute BookRequestDto bookRequestDto, String memberId) throws Exception {
 
         return bookService.updateBook(bookId, bookRequestDto, memberId);
