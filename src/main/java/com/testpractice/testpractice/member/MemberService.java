@@ -36,9 +36,10 @@ public class MemberService {
         return new ResponseEntity<>("회원가입이 완료되었습니다.", HttpStatus.OK);
     }
 
+    @Transactional
     public ResponseEntity<?> login(MemberRequestDto memberRequestDto) {
 
-        if(memberRepository.existByIdAndPassword(memberRequestDto.getId(),memberRequestDto.getPassword())){
+        if(memberRepository.existsByIdAndPassword(memberRequestDto.getId(),memberRequestDto.getPassword())){
             throw new IllegalArgumentException("아이디 혹은 비밀번호가 일치하지 않습니다.");
         }
 

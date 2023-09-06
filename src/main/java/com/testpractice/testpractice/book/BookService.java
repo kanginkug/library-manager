@@ -27,7 +27,7 @@ public class BookService {
 
         return new ResponseEntity<>("등록이 완료 되었습니다", HttpStatus.OK);
     }
-
+    @Transactional
     public ResponseEntity<?> updateBook(Long bookId, BookRequestDto bookRequestDto, String memberId) {
 
         Member member = memberRepository.findAllById(memberId).orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다."));

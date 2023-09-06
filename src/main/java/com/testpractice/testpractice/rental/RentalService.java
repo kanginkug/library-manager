@@ -72,14 +72,15 @@ public class RentalService {
 
     }
 
+    @Transactional
     public ResponseEntity<?> checkRental(String bookName) {
 
-        List<Rental> bookIds = rentalRepository.findAllByBookName(bookName);
+        List<Book> bookIds = bookRepository.findAllByBookName(bookName);
 
         return new ResponseEntity<>(bookIds, HttpStatus.OK);
 
     }
-
+    @Transactional
     public ResponseEntity<?> receiveBook(Long bookId) {
 
         LocalDate now = LocalDate.now();

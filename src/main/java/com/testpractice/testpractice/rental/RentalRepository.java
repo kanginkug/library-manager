@@ -8,7 +8,7 @@ import java.util.List;
 public interface RentalRepository extends JpaRepository<Rental, Long> {
         Boolean findReceiveByBookId(Long bookId);
 
-        List<Rental> findAllByBookName(String bookName);
+
 
         Rental findAllByBookId(Long bookId);
 }

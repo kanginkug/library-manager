@@ -10,7 +10,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsById(String memberId);
 
-    boolean existByIdAndPassword(String memberId, String password);
+    boolean existsByIdAndPassword(String memberId, String password);
 
     Optional<Member> findAllById(String memberId);
 
