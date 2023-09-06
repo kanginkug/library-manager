@@ -30,11 +30,17 @@ public class RentalService {
                 return new ResponseEntity<>("존재하지 않는 아이디입니다.", HttpStatus.BAD_REQUEST);
             }
 
+            if(memberRepository.findByLogin(member.getId())){
+                return new ResponseEntity<>("로그인 상태가 아닙니다.", HttpStatus.BAD_REQUEST);
+            }
+
             bookId = bookRepository.findIdByBookName(book.getBookName());
 
             if(rentalRepository.findReceiveByBookId(bookId) == true){
                 return new ResponseEntity<>("대출 되어 있는 책입니다.", HttpStatus.BAD_REQUEST);
             }
+
+
 
             Rental rental = Rental.builder()
                     .member(member)
