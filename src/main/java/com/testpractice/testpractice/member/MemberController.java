@@ -3,10 +3,7 @@ package com.testpractice.testpractice.member;
 import com.testpractice.testpractice.member.dto.MemberRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +16,12 @@ public class MemberController {
     public ResponseEntity<?> signup(@RequestBody MemberRequestDto memberRequestDto) {
 
         return memberService.signup(memberRequestDto);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<?> signin(@RequestBody MemberRequestDto memberRequestDto) {
+
+        return memberService.login(memberRequestDto);
     }
 
 

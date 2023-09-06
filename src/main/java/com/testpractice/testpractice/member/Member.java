@@ -28,4 +28,7 @@ public class Member {
 
     @Column(nullable = false)
     private String address;
+
+    @Column
+    private boolean login;
 }
