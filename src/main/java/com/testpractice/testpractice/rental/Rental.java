@@ -30,10 +30,10 @@ public class Rental {
     private Book book;
 
     @Column
-    private Date rentalDate;
+    private String rentalDate;
 
     @Column
-    private Date receiveDate;
+    private String receiveDate;
 
     @Column
     private Boolean receive;

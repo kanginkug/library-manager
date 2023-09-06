@@ -10,6 +10,4 @@ import java.util.Date;
 @AllArgsConstructor
 public class RentalRequestDto {
 
-    private Date rentalDate;
-    private Date receiveDate;
 }

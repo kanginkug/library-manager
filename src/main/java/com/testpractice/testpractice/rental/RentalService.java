@@ -13,6 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RentalService {
@@ -22,7 +27,19 @@ public class RentalService {
     private final BookRepository bookRepository;
 
     @Transactional
-    public ResponseEntity<?> insertRental(RentalRequestDto rentalRequestDto, Book book, Member member) {
+    public ResponseEntity<?> insertRental(Book book, Member member) {
+
+        LocalDate now = LocalDate.now();
+
+        // 현재 시간
+        LocalTime nowTime = LocalTime.now();
+
+        // 포맷 정의하기
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH : mm");
+
+        String formatedNow = nowTime.format(formatter);
+
+        String date = nowTime + " " + formatedNow;
 
         Long bookId=0L;
 
@@ -45,14 +62,49 @@ public class RentalService {
             Rental rental = Rental.builder()
                     .member(member)
                     .book(book)
-                    .rentalDate(rentalRequestDto.getRentalDate())
+                    .rentalDate(date)
                     .receive(true)
                     .build();
 
             rentalRepository.save(rental);
 
-        return new ResponseEntity<>("대여가 완료 되었습니다", HttpStatus.OK);
+        return new ResponseEntity<>("대출이 완료 되었습니다", HttpStatus.OK);
 
     }
 
+    public ResponseEntity<?> checkRental(String bookName) {
+
+        List<Rental> bookIds = rentalRepository.findAllByBookName(bookName);
+
+        return new ResponseEntity<>(bookIds, HttpStatus.OK);
+
+    }
+
+    public ResponseEntity<?> receiveBook(Long bookId) {
+
+        LocalDate now = LocalDate.now();
+
+        // 현재 시간
+        LocalTime nowTime = LocalTime.now();
+
+        // 포맷 정의하기
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH : mm");
+
+        String formatedNow = nowTime.format(formatter);
+
+        String date = nowTime + " " + formatedNow;
+
+        Rental rentalData = rentalRepository.findAllByBookId(bookId);
+
+        Rental rental = Rental.builder()
+                .member(null)
+                .receiveDate(date)
+                .receive(false)
+                .build();
+
+        rentalRepository.save(rental);
+
+        return new ResponseEntity<>("반납이 완료 되었습니다", HttpStatus.OK);
+        
+    }
 }
