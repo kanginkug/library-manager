@@ -53,7 +53,7 @@ jobs:
         aws-region: ap-northeast-2
 
     - name: Upload to S3
-      run: aws s3 cp --region ap-northeast-2 ./test-practice.zip s3://kik-coding/
+      run: aws s3 cp --region ap-northeast-2 ./test-practice.zip s3://kik-test-coding/
 
 
 # Deploy
@@ -66,5 +66,5 @@ jobs:
         --application-name test-practice
         --deployment-group-name test-practice-group
         --file-exists-behavior OVERWRITE 
-        --s3-location bucket=kik-coding,bundleType=zip,key=test-practice.zip
+        --s3-location bucket=kik-test-coding,bundleType=zip,key=test-practice.zip
         --region ap-northeast-2
