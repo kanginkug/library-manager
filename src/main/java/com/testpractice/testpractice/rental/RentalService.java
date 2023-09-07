@@ -71,7 +71,7 @@ public class RentalService {
     }
     @Transactional
     public ResponseEntity<?> receiveBook(RentalRequestDto rentalRequestDto) {
-
+        int x=0;
 
         Rental rental= new Rental();
 
