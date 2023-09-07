@@ -64,7 +64,7 @@ jobs:
       run:
         aws deploy create-deployment 
         --application-name test-practice
-        --deployment-group-name test-practice-group
+        --deployment-group-name dev
         --file-exists-behavior OVERWRITE 
         --s3-location bucket=kik-test-coding,bundleType=zip,key=test-practice.zip
         --region ap-northeast-2
