@@ -5,6 +5,7 @@ import com.testpractice.testpractice.book.BookCode;
 import com.testpractice.testpractice.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor

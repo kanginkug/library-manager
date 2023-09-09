@@ -11,4 +11,8 @@ public class BookCodeRequestDto {
     private int id;
     private Member member;
     private String category;
+
+    public BookCodeRequestDto(){
+
+    }
 }

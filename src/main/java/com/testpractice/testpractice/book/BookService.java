@@ -23,9 +23,6 @@ public class BookService {
     @Transactional
     public ResponseEntity<?> insertBook(BookRequestDto bookRequestDto) {
 
-        Member member = memberRepository.findByIdAndPassword(bookRequestDto.getMember().getId(),bookRequestDto.getMember().getPassword())
-                .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다"));
-
         Member trueMem = memberRepository.findById(bookRequestDto.getMember().getId())
                 .orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다"));
 
@@ -45,9 +42,6 @@ public class BookService {
     }
     @Transactional
     public ResponseEntity<?> updateBook(BookRequestDto bookRequestDto) {
-
-        Member member = memberRepository.findByIdAndPassword(bookRequestDto.getMember().getId(),bookRequestDto.getMember().getPassword())
-                .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다"));
 
         Member trueMem = memberRepository.findById(bookRequestDto.getMember().getId())
                 .orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다"));

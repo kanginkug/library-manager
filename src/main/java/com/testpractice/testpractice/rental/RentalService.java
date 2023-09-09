@@ -28,8 +28,16 @@ public class RentalService {
 
     @Transactional
     public ResponseEntity<?> insertRental(RentalRequestDto rentalRequestDto) {
+
         Book rentalBook = bookRepository.findByBookNameAndRental(rentalRequestDto.getBook().getBookName(),false).orElseThrow(() ->
                 new NullPointerException("해당 책은 대여되었거나 구비되어 있지 않습니다."));
+
+        Member trueMem = memberRepository.findById(rentalRequestDto.getMember().getId())
+                .orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다"));
+
+        if(!trueMem.isLogin()){
+            throw new IllegalArgumentException("로그인 상태가 아닙니다.");
+        }
 
         LocalDate now = LocalDate.now();
         // 현재 시간

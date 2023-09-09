@@ -17,10 +17,6 @@ public class BookCodeService {
     private final MemberRepository memberRepository;
     @Transactional
     public ResponseEntity<?> insertBookCode(BookCodeRequestDto bookCodeRequestDto) {
-
-        Member member = memberRepository.findByIdAndPassword(bookCodeRequestDto.getMember().getId(),bookCodeRequestDto.getMember().getPassword())
-                .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다"));
-
         Member trueMem = memberRepository.findById(bookCodeRequestDto.getMember().getId())
                 .orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다"));
 

@@ -29,7 +29,7 @@ public class RentalController {
         return rentalService.checkRental(bookName);
     }
 
-    @PatchMapping("/receiveBooks")
+    @PatchMapping("/receive-books")
     public ResponseEntity<?> receiveBook(@RequestBody RentalRequestDto rentalRequestDto) throws Exception {
 
         return rentalService.receiveBook(rentalRequestDto);
