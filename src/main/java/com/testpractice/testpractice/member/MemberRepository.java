@@ -19,5 +19,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     boolean existsByPhone(String phone);
 
+    boolean findAdminById(String memberId);
 
 }

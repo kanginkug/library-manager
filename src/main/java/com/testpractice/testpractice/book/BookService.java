@@ -22,6 +22,17 @@ public class BookService {
     private final MemberRepository memberRepository;
     @Transactional
     public ResponseEntity<?> insertBook(BookRequestDto bookRequestDto) {
+
+        Member member = memberRepository.findByIdAndPassword(bookRequestDto.getMember().getId(),bookRequestDto.getMember().getPassword())
+                .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다"));
+
+        Member trueMem = memberRepository.findById(bookRequestDto.getMember().getId())
+                .orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다"));
+
+        if(!trueMem.isAdmin() || !trueMem.isLogin()){
+            throw new IllegalArgumentException("관리자가 아니거나 로그아웃 상태입니다.");
+        }
+
         Book book = Book.builder()
                 .bookName(bookRequestDto.getBookName())
                 .author(bookRequestDto.getAuthor())
@@ -35,24 +46,17 @@ public class BookService {
     @Transactional
     public ResponseEntity<?> updateBook(BookRequestDto bookRequestDto) {
 
-
         Member member = memberRepository.findByIdAndPassword(bookRequestDto.getMember().getId(),bookRequestDto.getMember().getPassword())
                 .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다"));
 
         Member trueMem = memberRepository.findById(bookRequestDto.getMember().getId())
-                .orElseThrow(()->new NullPointerException("아이디 혹은 비밀번호가 일치하지 않습니다"));
-
-
+                .orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다"));
 
         if(!trueMem.isAdmin() || !trueMem.isLogin()){
             throw new IllegalArgumentException("관리자가 아니거나 로그아웃 상태입니다.");
         }
 
-
         Book book =  bookRepository.findById(bookRequestDto.getBookId()).orElseThrow(() -> new NullPointerException("해당 도서를 찾을 수 없습니다."));
-
-
-
 
         book.updateBook(bookRequestDto);
 

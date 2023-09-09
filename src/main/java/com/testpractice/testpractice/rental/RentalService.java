@@ -30,18 +30,14 @@ public class RentalService {
     public ResponseEntity<?> insertRental(RentalRequestDto rentalRequestDto) {
         Book rentalBook = bookRepository.findByBookNameAndRental(rentalRequestDto.getBook().getBookName(),false).orElseThrow(() ->
                 new NullPointerException("해당 책은 대여되었거나 구비되어 있지 않습니다."));
-        LocalDate now = LocalDate.now();
 
+        LocalDate now = LocalDate.now();
         // 현재 시간
         LocalTime nowTime = LocalTime.now();
-
         // 포맷 정의하기
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH : mm");
-
         String formatedNow = nowTime.format(formatter);
-
         String date = nowTime + " " + formatedNow;
-
 
         Member member = memberRepository.findById(rentalRequestDto.getMember().getId()).orElseThrow(()->new NullPointerException("아이디가 존재하지 않습니다."));
 
@@ -75,15 +71,11 @@ public class RentalService {
         Rental rental= new Rental();
 
         LocalDate now = LocalDate.now();
-
         // 현재 시간
         LocalTime nowTime = LocalTime.now();
-
         // 포맷 정의하기
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH : mm");
-
         String formatedNow = nowTime.format(formatter);
-
         String date = nowTime + " " + formatedNow;
 
         Book receiveBook= bookRepository.findByIdAndRental(rentalRequestDto.getBook().getId(), true).orElseThrow(()->new NullPointerException("해당 책은 대여되지 않았습니다."));
